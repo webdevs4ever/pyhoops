@@ -1,0 +1,33 @@
+/* Landing Page Styles */
+
+.landing-note {
+    background: var(--accent-blue);
+    border-left: 4px solid var(--court-orange);
+    padding: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.dev-note {
+    background: var(--gray);
+    border: 2px solid var(--court-wood);
+    padding: 20px;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--court-wood);
+}
+
+@media (max-width: 768px) {
+    .player-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,129 @@
+/* PyHoops Main Styles - Matching Wireframe Design */
+
+:root {
+    --court-orange: #E86A33;
+    --deep-black: #0A0A0A;
+    --court-wood: #C19A6B;
+    --white: #FAFAFA;
+    --gray: #3A3A3A;
+    --accent-blue: #1D428A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Mono', monospace;
+    background: var(--deep-black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--court-orange), transparent);
+}
+
+.app-title {
+    font-size: 5rem;
+    color: var(--court-orange);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 4px 4px 0px var(--accent-blue);
+}
+
+.tagline {
+    font-size: 0.9rem;
+    color: var(--court-wood);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Button Styles */
+.btn {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    padding: 12px 30px;
+    background: var(--gray);
+    border: 2px solid var(--court-orange);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: var(--court-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--accent-blue);
+}
+
+.btn-primary {
+    background: var(--accent-blue);
+    border-color: var(--court-orange);
+}
+
+.btn-primary:hover {
+    background: var(--court-orange);
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.2rem;
+    color: var(--court-orange);
+}
+
+.error {
+    background: #8B0000;
+    border: 2px solid var(--court-orange);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 0;
+    color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .app-title {
+        font-size: 3rem;
+    }
+    
+    .container {
+        padding: 20px 15px;
+    }
+}

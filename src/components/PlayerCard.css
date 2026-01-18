@@ -1,0 +1,112 @@
+/* Player Card with Flip Animation */
+
+.player-card {
+    position: relative;
+    height: 400px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.player-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 3px solid var(--court-orange);
+    background: var(--gray);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--deep-black);
+    border-color: var(--accent-blue);
+}
+
+.player-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--court-orange), var(--accent-blue));
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    border: 4px solid var(--court-wood);
+}
+
+.player-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.jersey-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--court-orange);
+    margin-top: 10px;
+}
+
+.stats-title {
+    color: var(--court-orange);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.stats-table {
+    width: 100%;
+    font-size: 0.75rem;
+    text-align: left;
+}
+
+.stats-table th {
+    color: var(--court-orange);
+    padding: 5px;
+    border-bottom: 2px solid var(--court-orange);
+}
+
+.stats-table td {
+    padding: 5px;
+    border-bottom: 1px solid var(--gray);
+}
+
+.more-link {
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: var(--court-orange);
+    color: var(--deep-black);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.more-link:hover {
+    background: var(--accent-blue);
+    color: var(--white);
+}
