@@ -7,6 +7,17 @@ function Landing() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedBalls, setSelectedBalls] = useState(new Set());
+
+  // Generate random positions for basketballs
+  const basketballs = Array.from({ length: 12 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 90 + 5, // 5-95%
+    top: Math.random() * 80 + 10, // 10-90%
+    size: Math.random() * 30 + 40, // 40-70px
+    duration: Math.random() * 3 + 4, // 4-7s rotation
+    delay: Math.random() * 2, // 0-2s delay
+  }));
 
   useEffect(() => {
     fetchPlayers();
@@ -22,6 +33,18 @@ function Landing() {
       setLoading(false);
       console.error('Error fetching players:', err);
     }
+  };
+
+  const toggleBallSelection = (ballId) => {
+    setSelectedBalls(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(ballId)) {
+        newSet.delete(ballId);
+      } else {
+        newSet.add(ballId);
+      }
+      return newSet;
+    });
   };
 
   if (loading) {
@@ -42,8 +65,45 @@ function Landing() {
     );
   }
 
+  // Find hot streak player (example: first player or one with highest recent avg)
+  const hotStreakPlayer = players.length > 0 ? players[0] : null;
+
+  // Show bonus tip only when at least one ball is selected
+  const showBonusTip = selectedBalls.size > 0;
+
   return (
     <div className="container">
+      {/* Spinning Basketballs Background */}
+      <div className="basketballs-container">
+        {basketballs.map((ball) => (
+          <div
+            key={ball.id}
+            className={`spinning-ball ${selectedBalls.has(ball.id) ? 'lit-up' : ''}`}
+            style={{
+              left: `${ball.left}%`,
+              top: `${ball.top}%`,
+              width: `${ball.size}px`,
+              height: `${ball.size}px`,
+              animationDuration: `${ball.duration}s`,
+              animationDelay: `${ball.delay}s`,
+            }}
+            onClick={() => toggleBallSelection(ball.id)}
+          >
+            🏀
+          </div>
+        ))}
+      </div>
+
+      {/* Bonus Tip Box - only shows when a ball is clicked */}
+      {showBonusTip && hotStreakPlayer && (
+        <div className="bonus-tip-box">
+          <span className="bonus-label">Bonus tip</span>
+          <span className="bonus-text">
+            {hotStreakPlayer.name} is on a hot streak 🔥
+          </span>
+        </div>
+      )}
+
       <div className="landing-note">
         <strong>💡 Hover over cards to flip them!</strong> Click "More" to see full stats.
       </div>
@@ -64,4 +124,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default Landing;   

@@ -1,33 +1,220 @@
 /* Landing Page Styles */
 
-.landing-note {
-    background: var(--accent-blue);
-    border-left: 4px solid var(--court-orange);
-    padding: 15px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.player-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.dev-note {
-    background: var(--gray);
-    border: 2px solid var(--court-wood);
+.container {
+    position: relative;
+    min-height: 100vh;
     padding: 20px;
-    margin-top: 50px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--court-wood);
-}
-
-@media (max-width: 768px) {
-    .player-grid {
-        grid-template-columns: 1fr;
+    overflow: hidden;
+  }
+  
+  /* Spinning Basketballs Background */
+  .basketballs-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  
+  .spinning-ball {
+    position: absolute;
+    font-size: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    animation: spin 5s linear infinite;
+    transition: filter 0.3s ease, transform 0.3s ease;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 5px transparent);
+    user-select: none;
+  }
+  
+  .spinning-ball:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  
+  .spinning-ball.lit-up {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px #ff6b00) drop-shadow(0 0 40px #ff9500) drop-shadow(0 0 60px #ffb800);
+    animation: spin 5s linear infinite, pulse-glow 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
     }
-}
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 20px #ff6b00) drop-shadow(0 0 40px #ff9500);
+    }
+    50% {
+      filter: drop-shadow(0 0 30px #ff6b00) drop-shadow(0 0 60px #ff9500) drop-shadow(0 0 80px #ffb800);
+    }
+  }
+  
+  /* Bonus Tip Box */
+  .bonus-tip-box {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid #ff6b00;
+    border-radius: 12px;
+    padding: 15px 25px;
+    margin: 20px auto 30px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 
+      0 4px 15px rgba(255, 107, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: tip-entrance 0.5s ease-out;
+  }
+  
+  @keyframes tip-entrance {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .bonus-label {
+    background: linear-gradient(135deg, #ff6b00, #ff9500);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  
+  .bonus-text {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  /* Landing Note */
+  .landing-note {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    color: #ccc;
+  }
+  
+  /* Player Grid */
+  .player-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto auto;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .player-grid > *:nth-child(1) { grid-column: 2 / 4; }
+  .player-grid > *:nth-child(2) { grid-column: 4 / 6; }
+  .player-grid > *:nth-child(3) { grid-column: 1 / 3; }
+  .player-grid > *:nth-child(4) { grid-column: 3 / 5; }
+  .player-grid > *:nth-child(5) { grid-column: 5 / 7; }
+  
+  /* Loading State */
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 1.5rem;
+    color: #ff6b00;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Error State */
+  .error {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 0, 0, 0.1);
+    border: 2px solid #ff4444;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    max-width: 500px;
+    margin: 50px auto;
+  }
+  
+  .error h3 {
+    color: #ff4444;
+    margin-bottom: 10px;
+  }
+  
+  .error code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+  
+  /* Dev Note */
+  .dev-note {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    color: #888;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .player-grid {
+      grid-template-columns: 1fr;
+      padding: 10px;
+    }
+    
+    .bonus-tip-box {
+      flex-direction: column;
+      text-align: center;
+      padding: 15px;
+    }
+    
+    .spinning-ball {
+      opacity: 0.4;
+    }
+  }
+  
